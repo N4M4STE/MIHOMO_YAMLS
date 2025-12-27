@@ -1,4 +1,4 @@
-# 📂 echs-top
+# 📂 ClashConnectRules
 
 > 自动生成的文件列表 / Automatically generated file list.
 
@@ -8,4 +8,4 @@
 
 | 文件名 (Filename) | 大小 (Size) | 在线查看 (Link) |
 | :--- | :--- | :--- |
-| **mihomo.yaml** | 26.7 KB | [查看配置](https://github.com/HenryChiao/mihomo_yamls/blob/main/General_Config/echs-top/mihomo.yaml) |
+| **Clash.yaml** | 27.3 KB | [查看配置](https://github.com/HenryChiao/mihomo_yamls/blob/main/General_Config/ClashConnectRules/Clash.yaml) |
