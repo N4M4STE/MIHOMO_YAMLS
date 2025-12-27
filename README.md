@@ -8,6 +8,10 @@
 [![Repo Size](https://img.shields.io/github/repo-size/HenryChiao/mihomo_yamls?style=flat-square&color=blue)](https://github.com/HenryChiao/mihomo_yamls)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](./LICENSE)
 
+[![Stars](https://img.shields.io/github/stars/HenryChiao/mihomo_yamls?style=social)](https://github.com/HenryChiao/mihomo_yamls/stargazers)
+[![Forks](https://img.shields.io/github/forks/HenryChiao/mihomo_yamls?style=social)](https://github.com/HenryChiao/mihomo_yamls/network/members)
+![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=HenryChiao.mihomo_yamls&left_color=gray&right_color=orange)
+
 <p>
   每日自动抓取更新 · 严格分类整理 · 纯净开箱即用
 </p>
@@ -164,6 +168,18 @@
 > 2.  **请勿将本项目的任何内容用于商业或非法目的，否则后果自负。**
 > 3.  一旦使用并复制了该项目的任何文件，则视为您已接受此免责声明。
 > 4.  保留随时更改或补充此免责声明的权利。
+
+---
+
+## 📈 趋势与统计 (Trends)
+
+<div align="center">
+
+<a href="https://star-history.com/#HenryChiao/mihomo_yamls&Date">
+ <img src="https://api.star-history.com/svg?repos=HenryChiao/mihomo_yamls&type=Date" alt="Star History Chart">
+</a>
+
+</div>
 
 ---
 
