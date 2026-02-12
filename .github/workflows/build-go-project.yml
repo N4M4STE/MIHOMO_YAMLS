@@ -47,10 +47,10 @@ jobs:
           # macOS平台
           - { platform: darwin, arch: amd64 }
           - { platform: darwin, arch: arm64 }
-          # Android平台（移除CGO，使用标准构建）
-          - { platform: android, arch: arm64 }
-          - { platform: android, arch: armv7 }
-          - { platform: android, arch: amd64 }
+          # Android平台（需要CGO）
+          - { platform: android, arch: arm64, cgo: true }
+          - { platform: android, arch: armv7, cgo: true }
+          - { platform: android, arch: amd64, cgo: true }
       fail-fast: false
     
     steps:
@@ -62,6 +62,19 @@ jobs:
         with:
           go-version: ${{ inputs.go_version }}
           cache: false
+
+      - name: 安装Android NDK
+        if: matrix.platform == 'android'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          
+          # 下载NDK
+          NDK_VERSION="r26b"
+          wget -q "https://dl.google.com/android/repository/android-ndk-${NDK_VERSION}-linux.zip" -O /tmp/ndk.zip
+          unzip -q /tmp/ndk.zip -d /tmp/
+          echo "ANDROID_NDK_HOME=/tmp/android-ndk-${NDK_VERSION}" >> $GITHUB_ENV
+          echo "NDK路径: /tmp/android-ndk-${NDK_VERSION}"
 
       - name: 设置环境变量
         run: |
@@ -102,8 +115,37 @@ jobs:
               echo "GOMIPS=hardfloat" >> $GITHUB_ENV
               ;;
           esac
+          
           echo "GOOS=${{ matrix.platform }}" >> $GITHUB_ENV
-          echo "CGO_ENABLED=0" >> $GITHUB_ENV
+          
+          # Android需要CGO
+          if [[ "${{ matrix.platform }}" == "android" ]]; then
+            echo "CGO_ENABLED=1" >> $GITHUB_ENV
+            
+            # 设置NDK工具链
+            NDK_HOME="/tmp/android-ndk-r26b"
+            
+            case "${{ matrix.arch }}" in
+              arm64)
+                TOOLCHAIN="aarch64-linux-android21"
+                CC="${NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/${TOOLCHAIN}-clang"
+                ;;
+              armv7)
+                TOOLCHAIN="armv7a-linux-androideabi21"
+                CC="${NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/${TOOLCHAIN}-clang"
+                ;;
+              amd64)
+                TOOLCHAIN="x86_64-linux-android21"
+                CC="${NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64/bin/${TOOLCHAIN}-clang"
+                ;;
+            esac
+            
+            echo "CC=${CC}" >> $GITHUB_ENV
+            echo "CXX=${CC}++" >> $GITHUB_ENV
+            echo "使用工具链: ${TOOLCHAIN}"
+          else
+            echo "CGO_ENABLED=0" >> $GITHUB_ENV
+          fi
 
       - name: 克隆并构建
         run: |
@@ -143,6 +185,8 @@ jobs:
           fi
           
           echo "构建: ${{ inputs.project }} ${{ inputs.variant }} ${{ matrix.platform }}/${{ matrix.arch }}"
+          echo "CGO_ENABLED=${CGO_ENABLED}"
+          [[ -n "${CC:-}" ]] && echo "CC=${CC}"
           
           go build -v -trimpath \
             -ldflags "-checklinkname=0 -X 'github.com/sagernet/sing-box/constant.Version=${{ inputs.version }}' -s -w -buildid=" \
