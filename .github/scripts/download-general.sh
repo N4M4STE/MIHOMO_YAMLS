@@ -35,6 +35,8 @@ https://gist.githubusercontent.com/liuran001/5ca84f7def53c70b554d3f765ff86a33/ra
 https://raw.githubusercontent.com/wanswu/my-backup/refs/heads/main/clash/config.yaml|THEYAMLS/General_Config/wanswu/config.yaml
 https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Client/config.yaml|THEYAMLS/General_Config/Repcz/config.yaml
 https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Client/Lite/config.yaml|THEYAMLS/General_Config/Repcz/config_lite.yaml
+https://gist.github.com/SHICHUNHUI88/099059cfce913ef7b80496fbf4241324/raw/us_la.yaml|THEYAMLS/General_Config/SHICHUNHUI88/us_la.yaml
+https://gist.github.com/SHICHUNHUI88/b8e2ee8ca31a91f3dbc130e4e35e9996/raw/Clash-Airport.yaml|THEYAMLS/General_Config/SHICHUNHUI88/Clash-Airport.yaml
 EOF
 )
 
